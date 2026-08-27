@@ -1,5 +1,5 @@
 Class {
-	#name : 'SBBonfire',
+	#name : 'SBBonfireMorph',
 	#superclass : 'Morph',
 	#instVars : [
 		'label',
@@ -12,13 +12,13 @@ Class {
 }
 
 { #category : 'class initialization' }
-SBBonfire class >> initialize [
+SBBonfireMorph class >> initialize [
 
 	SessionManager default registerUserClassNamed: #SBBonfireHook
 ]
 
 { #category : 'accessing' }
-SBBonfire class >> show [
+SBBonfireMorph class >> show [
 
 	| morph |
 	morph := self new.
@@ -28,11 +28,12 @@ SBBonfire class >> show [
 ]
 
 { #category : 'initialization' }
-SBBonfire >> initialize [
+SBBonfireMorph >> initialize [
 
 	super initialize.
 	self color: Color transparent.
 	self bounds: self currentWorld bounds.
+	self lock.
 	label := LabelMorph new
 		contents: 'BONFIRE LIT';
 		font: (LogicalFont familyName: 'Source Sans Pro' pointSize: 48);
@@ -50,7 +51,7 @@ SBBonfire >> initialize [
 ]
 
 { #category : 'initialization' }
-SBBonfire >> step [
+SBBonfireMorph >> step [
 
 	ticks := ticks + 1.
 	state = #fadeIn ifTrue: [ self stepFadeIn ].
@@ -59,7 +60,7 @@ SBBonfire >> step [
 ]
 
 { #category : 'initialization' }
-SBBonfire >> stepFadeIn [
+SBBonfireMorph >> stepFadeIn [
 
 	| progress |
 	progress := ticks / 20.0 min: 1.
@@ -71,7 +72,7 @@ SBBonfire >> stepFadeIn [
 ]
 
 { #category : 'initialization' }
-SBBonfire >> stepFadeOut [
+SBBonfireMorph >> stepFadeOut [
 
 	| progress |
 	progress := ticks / 35.0 min: 1.
@@ -83,7 +84,7 @@ SBBonfire >> stepFadeOut [
 ]
 
 { #category : 'initialization' }
-SBBonfire >> stepHold [
+SBBonfireMorph >> stepHold [
 
 	ticks >= 90 ifFalse: [ ^ self ].
 	ticks := 0.
@@ -91,7 +92,7 @@ SBBonfire >> stepHold [
 ]
 
 { #category : 'stepping and presenter' }
-SBBonfire >> stepTime [
+SBBonfireMorph >> stepTime [
 
 	^ 20
 ]

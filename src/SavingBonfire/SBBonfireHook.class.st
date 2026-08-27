@@ -8,7 +8,7 @@ Class {
 { #category : 'system startup' }
 SBBonfireHook class >> shutDown: quitting [
 
-	quitting ifFalse: [ SBBonfire show ]
+	quitting ifFalse: [ SBBonfireMorph show ]
 ]
 
 { #category : 'system startup' }
