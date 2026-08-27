@@ -5,8 +5,6 @@ Class {
 		'label',
 		'ticks',
 		'state',
-		'topBar',
-		'bottomBar',
 		'band'
 	],
 	#category : 'SavingBonfire',
