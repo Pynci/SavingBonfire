@@ -10,6 +10,12 @@ Class {
 	#package : 'SavingBonfire'
 }
 
+{ #category : 'class initialization' }
+SBBonfire class >> initialize [
+
+	SessionManager default registerUserClassNamed: #DSBonfireHook
+]
+
 { #category : 'accessing' }
 SBBonfire class >> show [
 
