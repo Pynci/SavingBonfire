@@ -13,7 +13,7 @@ Class {
 { #category : 'class initialization' }
 SBBonfire class >> initialize [
 
-	SessionManager default registerUserClassNamed: #DSBonfireHook
+	SessionManager default registerUserClassNamed: #SBBonfireHook
 ]
 
 { #category : 'accessing' }
@@ -36,6 +36,7 @@ SBBonfire >> initialize [
 		contents: 'BONFIRE LIT';
 		font: (LogicalFont familyName: 'Source Sans Pro' pointSize: 48);
 		color: (Color orange alpha: 0);
+		autoFit: true;
 		yourself.
 	self addMorph: label.
 	label position: self center - (label extent // 2).
