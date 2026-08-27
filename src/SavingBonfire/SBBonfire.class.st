@@ -13,7 +13,7 @@ Class {
 { #category : 'class initialization' }
 SBBonfire class >> initialize [
 
-	SessionManager default registerUserClassNamed: #DSBonfireHook
+	SessionManager default registerUserClassNamed: #SBBonfireHook
 ]
 
 { #category : 'accessing' }
