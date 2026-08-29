@@ -22,9 +22,20 @@ SBBonfireMorph class >> show [
 
 	| morph |
 	morph := self new.
+	[ morph playBonfireSound ] fork.
 	morph openInWorld.
 	morph startStepping.
 	^ morph
+]
+
+{ #category : 'as yet unclassified' }
+SBBonfireMorph >> bonfireSoundPath [
+
+	| repo |
+	repo := IceRepository registry
+		detect: [ :r | r name = 'SavingBonfire' ]
+		ifNone: [ ^ nil ].
+	^ (repo location / 'darksouls-bonfire.wav') fullName
 ]
 
 { #category : 'initialization' }
@@ -48,6 +59,20 @@ SBBonfireMorph >> initialize [
 	band bounds: ((self bounds left @ (label top - 20)) corner: (self bounds right @ (label bottom + 20))).
 	ticks := 0.
 	state := #fadeIn
+]
+
+{ #category : 'as yet unclassified' }
+SBBonfireMorph >> playBonfireSound [
+
+	| soundPath |
+	soundPath := 'bonfire.wav' asFileReference fullName.
+	
+	OSPlatform current isMacOS ifTrue: [ 
+		LibC runCommand: 'afplay "', soundPath, '" &' ].
+	OSPlatform current isWindows ifTrue: [ 
+		LibC runCommand: 'powershell -c "(New-Object Media.SoundPlayer ''', soundPath, ''').Play()"' ].
+	OSPlatform current isUnix ifTrue: [ 
+		LibC runCommand: 'aplay -q "', soundPath, '" &' ]
 ]
 
 { #category : 'initialization' }
@@ -86,7 +111,7 @@ SBBonfireMorph >> stepFadeOut [
 { #category : 'initialization' }
 SBBonfireMorph >> stepHold [
 
-	ticks >= 90 ifFalse: [ ^ self ].
+	ticks >= 195 ifFalse: [ ^ self ].
 	ticks := 0.
 	state := #fadeOut
 ]
