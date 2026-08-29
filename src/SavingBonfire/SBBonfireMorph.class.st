@@ -28,7 +28,7 @@ SBBonfireMorph class >> show [
 	^ morph
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'sound' }
 SBBonfireMorph >> bonfireSoundPath [
 
 	| repo |
@@ -61,11 +61,11 @@ SBBonfireMorph >> initialize [
 	state := #fadeIn
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'sound' }
 SBBonfireMorph >> playBonfireSound [
 
 	| soundPath |
-	soundPath := 'bonfire.wav' asFileReference fullName.
+	soundPath := self bonfireSoundPath.
 	
 	OSPlatform current isMacOS ifTrue: [ 
 		LibC runCommand: 'afplay "', soundPath, '" &' ].
@@ -75,7 +75,7 @@ SBBonfireMorph >> playBonfireSound [
 		LibC runCommand: 'aplay -q "', soundPath, '" &' ]
 ]
 
-{ #category : 'initialization' }
+{ #category : 'stepping and presenter' }
 SBBonfireMorph >> step [
 
 	ticks := ticks + 1.
@@ -84,7 +84,7 @@ SBBonfireMorph >> step [
 	state = #fadeOut ifTrue: [ self stepFadeOut ]
 ]
 
-{ #category : 'initialization' }
+{ #category : 'stepping and presenter' }
 SBBonfireMorph >> stepFadeIn [
 
 	| progress |
@@ -96,7 +96,7 @@ SBBonfireMorph >> stepFadeIn [
 	state := #hold
 ]
 
-{ #category : 'initialization' }
+{ #category : 'stepping and presenter' }
 SBBonfireMorph >> stepFadeOut [
 
 	| progress |
@@ -108,10 +108,10 @@ SBBonfireMorph >> stepFadeOut [
 	self delete
 ]
 
-{ #category : 'initialization' }
+{ #category : 'stepping and presenter' }
 SBBonfireMorph >> stepHold [
 
-	ticks >= 195 ifFalse: [ ^ self ].
+	ticks >= 110 ifFalse: [ ^ self ].
 	ticks := 0.
 	state := #fadeOut
 ]
