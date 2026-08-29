@@ -22,7 +22,6 @@ SBBonfireMorph class >> show [
 
 	| morph |
 	morph := self new.
-	[ morph playBonfireSound ] fork.
 	morph openInWorld.
 	morph startStepping.
 	^ morph
@@ -88,6 +87,8 @@ SBBonfireMorph >> step [
 SBBonfireMorph >> stepFadeIn [
 
 	| progress |
+	ticks = 1 ifTrue: [ self playBonfireSound ].
+	
 	progress := ticks / 20.0 min: 1.
 	band color: (Color black alpha: progress * 0.75).
 	label color: (Color orange alpha: progress).
